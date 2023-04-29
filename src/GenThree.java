@@ -1,20 +1,21 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenThree {
-    private int id;
-    private List<Human> humanList;
+public class GenThree implements Serializable{
+
+    private List<Human> genThree;
 
     public GenThree() {
-        this.humanList = new ArrayList<>();
+        this.genThree = new ArrayList<>();
     }
 
-    public void addHuman (Human human){
-        humanList.add(human);
+    public void addHuman (Human human){ /*добавление нового человека в список*/
+        genThree.add(human);
     }
 
-    public Human getHumanByName (String name){
-        for (Human human: humanList ){
+    public Human getHumanByName (String name){/*Поиск по имени*/
+        for (Human human: genThree ){
             if (human.getName().equals(name)){
                 return human;
             }
@@ -23,16 +24,17 @@ public class GenThree {
     }
 
     public List<Human> getHumanList(){
-        return humanList;
+        return genThree;
     }
 
     public String getInfo(){
         StringBuilder stringBuilder = new StringBuilder();
-        for (Human human: humanList){
+        for (Human human: genThree){
             stringBuilder.append(human);
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }
+
 }
 
