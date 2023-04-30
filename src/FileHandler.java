@@ -1,12 +1,12 @@
 import java.io.*;
 
-public class SaveWrite implements FilesWorking{
+public class FileHandler implements FilesWorking{
     @Override
-    public boolean save(Serializable serializable) {
+    public boolean save(Serializable serializable, String filePath) {
         try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("file.txt"));
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath));
             objectOutputStream.writeObject(serializable);
-            objectOutputStream.close();
+//            objectOutputStream.close();
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -15,9 +15,9 @@ public class SaveWrite implements FilesWorking{
     }
 
     @Override
-    public GenThree write() {
+    public GenThree read(String filePath) {
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("file.txt"));
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath));
             return (GenThree) objectInputStream.readObject();
         } catch (Exception e) {
             e.printStackTrace();

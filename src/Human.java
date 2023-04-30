@@ -7,8 +7,8 @@ public class Human implements Serializable {
     private int id;
     private String name;
     private String surname;
-    private  String patronymic;
-    private  int age;
+    private String patronymic;
+    private int age;
     private Gender gender;
     private Human mother;
     private Human father;
@@ -17,9 +17,8 @@ public class Human implements Serializable {
     private String dateOfDeath;
 
 
-
-    public Human (int id, String name, String surname, String patronymic, int age, Gender gender,
-                  String dateOfBirth, String dateOfDeath, Human mother, Human father, List<Human> children){
+    public Human(int id, String name, String surname, String patronymic, int age, Gender gender,
+                 String dateOfBirth, String dateOfDeath, Human mother, Human father) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -30,14 +29,19 @@ public class Human implements Serializable {
         this.dateOfDeath = dateOfDeath;
         this.mother = mother;
         this.father = father;
-        this.children = children;
+        this.children = new ArrayList<>();
     }
 
-    public Human (int id, String name, String surname, Gender gender, String dateOfBirth) {
-        this (id, name, surname, "Отчество", 18, gender, dateOfBirth, null, null, null, null);
+
+    public Human(int id, String name, String surname, Gender gender, String dateOfBirth) {
+        this(id, name, surname, "Отчество", 18, gender, dateOfBirth, null, null, null);
     }
-    public Human (int id, String name){
-        this(id, name,"н/д", null, null);
+
+    public Human(int id, String name, String surname, Gender gender, String dateOfBirth, Human mother, Human father) {
+        this(id, name, surname, "Отчество", 18, gender, dateOfBirth, null, mother, father);
+    }
+    public Human(int id, String name) {
+        this(id, name, "н/д", null, null);
     }
 
 
@@ -49,7 +53,7 @@ public class Human implements Serializable {
         this.id = id;
     }
 
-    public String getName(){
+    public String getName() {
 
         return name;
     }
@@ -58,7 +62,7 @@ public class Human implements Serializable {
         this.name = name;
     }
 
-    public String getSurname(){
+    public String getSurname() {
 
         return surname;
     }
@@ -67,7 +71,7 @@ public class Human implements Serializable {
         this.surname = surname;
     }
 
-    public String getPatronymic(){
+    public String getPatronymic() {
 
         return patronymic;
     }
@@ -76,7 +80,7 @@ public class Human implements Serializable {
         this.patronymic = patronymic;
     }
 
-    public int getAge(){
+    public int getAge() {
 
         return age;
     }
@@ -149,48 +153,76 @@ public class Human implements Serializable {
         return Objects.hash(name, surname, dateOfBirth);
     }
 
-    @Override
-    public String toString() {
+
+    public String getInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("id= " + id + "\n");
         stringBuilder.append("Имя= " + name + "\n");
         stringBuilder.append("Фамилия= " + surname + "\n");
         stringBuilder.append("Пол= " + gender + "\n");
         stringBuilder.append("Дата рождения= " + dateOfBirth + "\n");
-        if (dateOfDeath != null) stringBuilder.append("Дата смерти= " + dateOfDeath + "\n");
-        else stringBuilder.append("Дата смерти= н/д" + "\n");
-        if (mother != null) stringBuilder.append("Мать= " + mother.getFullName() + "\n");
-        else stringBuilder.append("Мать= н/д" + "\n");
-        if (father != null) stringBuilder.append("Отец= " + mother.getFullName() + "\n");
-        else stringBuilder.append("Отец= н/д" + "\n");
-        if (children == null) stringBuilder.append("Дети= н/д"  + "\n");
-        else {
-            stringBuilder.append("Дети: ");
-            for (Human child : children) {
-                stringBuilder.append(child.getFullName());
-            }
-        }
+        stringBuilder.append(getMotherInfo());
+        stringBuilder.append("\n");
+        stringBuilder.append(getFatherInfo());
+        stringBuilder.append("\n");
+        stringBuilder.append(getChildrenInfo());
+        stringBuilder.append("\n");
         return stringBuilder.toString();
+    }
+
+    @Override
+    public String toString(){
+        return  getInfo();
     }
 
     public String getFullName() {
         return this.getSurname() + " " + this.getName();
     }
 
-    public String getInfo(Human human) {
-        return human.toString();
-    }
 
-    public boolean addChild(Human child){
-        if(children == null){
+    public boolean addChild(Human child) {
+        if (children == null) {
             children = new ArrayList<>();
         }
-        if (!children.contains(child)){
+        if (!children.contains(child)) {
             children.add(child);
             return true;
         }
         return false;
     }
 
-}
+    public String getMotherInfo() {
+        String res = "мать= ";
+        if (mother != null) {
+            res += mother.getName();
+        } else {
+            res += "н/д";
+        }
+        return res;
+    }
 
+    public String getFatherInfo() {
+        String res = "отец= ";
+        if (father != null) {
+            res += father.getName();
+        } else {
+            res += "н/д";
+        }
+        return res;
+    }
+
+    public String getChildrenInfo() {
+        StringBuilder res = new StringBuilder();
+        res.append("дети= ");
+        if (children.size() != 0) {
+            res.append(children.get(0).getName());
+            for (int i = 1; i < children.size(); i++) {
+                res.append(",");
+                res.append(children.get(i).getName());
+            }
+        } else {
+            res.append("н/д");
+        }
+        return res.toString();
+    }
+}
