@@ -1,87 +1,96 @@
 import java.io.Serializable;
 import java.util.*;
 
-public class GenThree implements Serializable, Iterable<Human>{
+public class GenThree <E extends GenThreeItem> implements Serializable, Iterable<E>{
 
-    private List<Human> humanList;
+    private List<E> humanList;
 
     public GenThree() {
         this.humanList = new ArrayList<>();
     }
 
-    public GenThree(List<Human> humanList){
+    public GenThree(List<E> humanList){
         this.humanList = humanList;
     }
 
 
-    public boolean addHuman (Human human) { /*добавление нового человека в список*/
-        if (human == null) {
-            return false;
-        }
-        if (!humanList.contains(human)) {
-            humanList.add(human);
-            if (human.getFather() != null) {
-                human.getFather().addChild(human);
-            }
-            if (human.getMother() != null) {
-                human.getMother().addChild(human);
-            }
-            return true;
-        }
-        return false;
+    public void addHuman (E human) { /*добавление нового человека в список*/
+       humanList.add(human);
+//        if (human == null) {
+//            return false;
+//        }
+//        if (!humanList.contains(human)) {
+//            humanList.add(human);
+//            if (human.getFather() != null) {
+//                human.getFather().addChild(human);
+//            }
+//            if (human.getMother() != null) {
+//                human.getMother().addChild(human);
+//            }
+//            return true;
+//        }
+//        return false;
     }
 
 
-    public Human getByName (String name){/*Поиск по имени*/
-        for (Human human: humanList ){
-            if (human.getName().equals(name)){
-                return human;
-            }
-        }
-        return null;
-    }
+//    public Human getByName (String name){/*Поиск по имени*/
+//        for (E human: humanList ){
+//            if (human.getName().equals(name)){
+//                return human;
+//            }
+//        }
+//        return null;
+//    }
 
-    public List<Human> getHumanList(){
+    public List<E> getHumanList(){
         return humanList;
     }
 
 
-    public String getInfo(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("В дереве ");
-        stringBuilder.append(humanList.size());
-        stringBuilder.append(" объектов " + "\n");
-        for (Human human: humanList){
-            stringBuilder.append(human.getInfo());
-            stringBuilder.append("\n");
-        }
-        return stringBuilder.toString();
-    }
+//    public String getInfo(){
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append("В дереве ");
+//        stringBuilder.append(humanList.size());
+//        stringBuilder.append(" объектов " + "\n");
+//        for (E human: humanList){
+//            stringBuilder.append(human.getInfo());
+//            stringBuilder.append("\n");
+//        }
+//        return stringBuilder.toString();
+//    }
 
+
+    public void listOfNames() {
+        int count = 0;
+        for (E human : humanList) {
+            count++;
+            System.out.println(count + " " + human.getName());
+        }
+    }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(humanList);
+    public Iterator<E> iterator() {
+        return new HumanIterator<>(humanList);
     }
 
-    public Set<Human> birthdaySort() {
-        Set<Human> humanSet = new TreeSet<Human>(new HumanBirthdayComporator());
-        for (Human human : humanList) {
+    public Set<E> birthdaySort() {
+        Set<E> humanSet = new TreeSet<E>(new HumanBirthdayComporator<>());
+        for (E human : humanList) {
             humanSet.add(human);
         }
         return humanSet;
     }
 
-    public Set<Human> nameSort() {
-        Set<Human> humanSet = new TreeSet<>(new HumanNameComporator());
-        for (Human human : humanList
+    public Set<E> nameSort() {
+        Set<E> humanSet = new TreeSet<E>(new HumanNameComporator<>());
+        for (E human : humanList
         ) {
             humanSet.add(human);
         }
         return humanSet;
     }
-    public void printFamilySet(Set<Human> humanSet) {
-        for (Human human : humanSet) {
+    public void printFamilySet(Set<E> humanSet) {
+        for (E human : humanSet) {
             System.out.println(human.toString());
         }
     }

@@ -9,6 +9,7 @@ public class Main {
         FilesWorking filesWorking = new FileHandler();
 
         GenThree genThree = new GenThree();
+        Service service = new Service();
 //        GenThree genThree = (GenThree) filesWorking.read(filePath);
 
         genThree.addHuman(new Human(1, "Виктор"));
@@ -22,6 +23,7 @@ public class Main {
         service.printFamilySet(service.birthdaySort());
 
         filesWorking.save(genThree, filePath);
+        filesWorking.read(filePath);
 
         System.out.println(genThree.getInfo());
 

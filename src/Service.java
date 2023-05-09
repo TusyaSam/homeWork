@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class Service {
     private int id;
-    private  GenThree genThree;
+    private GenThree<Human> genThree;
     private List<GenThree> genThreeList;
 
     public Service(GenThree genThree) {
@@ -21,6 +21,9 @@ public class Service {
     public void addHuman (String name, String surname, String patronymic, int age, Gender gender,
                           String dateOfBirth, String dateOfDeath, Human mother, Human father){
             genThree.addHuman(new Human(id++, name, surname,patronymic, age, gender, dateOfBirth, dateOfDeath, mother, father));
+    }
+    public void addHumanList(GenThree genThree) {
+        genThreeList.add(genThree);
     }
 
     public String getInfo(){
@@ -59,6 +62,9 @@ public class Service {
             System.out.println(human.toString());
         }
     }
+    public void listOfNames() {
+        genThree.listOfNames();
+    }
 
     public Set<Human> birthdaySort (){
         return genThree.birthdaySort();
@@ -80,6 +86,8 @@ public class Service {
     public void printFamilySet(Set<Human> humanSet){
         genThree.printFamilySet(humanSet);
     }
-
+    public GenThree<Human> getGenThree() {
+        return genThree;
+    }
 }
 
