@@ -1,3 +1,5 @@
+import model.humans.tree.GenThree;
+
 import java.io.Serializable;
 
 public interface FilesWorking {

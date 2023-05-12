@@ -1,3 +1,8 @@
+package model;
+import model.humans.Gender;
+import model.humans.Human;
+import model.humans.tree.GenThree;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -18,9 +23,9 @@ public class Service {
         this(new GenThree());
     }
 
-    public void addHuman (String name, String surname, String patronymic, int age, Gender gender,
-                          String dateOfBirth, String dateOfDeath, Human mother, Human father){
-            genThree.addHuman(new Human(id++, name, surname,patronymic, age, gender, dateOfBirth, dateOfDeath, mother, father));
+    public void addHuman (String name, String surname, Gender gender,
+                          String dateOfBirth){
+            genThree.addHuman(new Human(id++, name, surname,gender, dateOfBirth));
     }
     public void addHumanList(GenThree genThree) {
         genThreeList.add(genThree);
@@ -34,13 +39,13 @@ public class Service {
         return stringBuilder.toString();
     }
 
-    public Human searchByName(String find) {
+    public String searchByName(String find) {
         for (Human human : genThree) {
             if (human.getName().equals(find)) {
-                return human;
+                return human.toString();
             }
         }
-        return null;
+        return "не найдено";
     }
 
     public Human searchByID(int find) {
@@ -52,33 +57,33 @@ public class Service {
         return null;
     }
 
-    public void PrintBirthdaySort () {
-        Set<Human> humanSet = new TreeSet<Human>(new HumanBirthdayComporator());
-        for (Human human : genThree) {
-            humanSet.add(human);
-        }
-
-        for (Human human : humanSet) {
-            System.out.println(human.toString());
-        }
-    }
-    public void listOfNames() {
-        genThree.listOfNames();
+//    public void PrintBirthdaySort () {
+//        Set<Human> humanSet = new TreeSet<Human>(new HumanBirthdayComporator());
+//        for (Human human : genThree) {
+//            humanSet.add(human);
+//        }
+//
+//        for (Human human : humanSet) {
+//            System.out.println(human.toString());
+//        }
+//    }
+    public String listOfNames() {
+        return  genThree.listOfNames();
     }
 
     public Set<Human> birthdaySort (){
         return genThree.birthdaySort();
     }
 
-    public void PrintNameSort() {
-        Set<Human> humanSet = new TreeSet<>(new HumanNameComporator());
-        for (Human human : genThree) {
-            humanSet.add(human);
-        }
-        for (Human human : humanSet) {
-            System.out.println(human.toString());
-        }
-    }
+//    public void PrintNameSort() {
+//        Set<Human> humanSet = new TreeSet<>(new HumanNameComporator());
+//        for (Human human : genThree) {
+//            humanSet.add(human);
+//        }
+//        for (Human human : humanSet) {
+//            System.out.println(human.toString());
+//        }
+//    }
     public Set<Human> nameSort(){
         return genThree.nameSort();
     }

@@ -1,3 +1,7 @@
+package model.humans.comporator;
+
+import model.humans.GenThreeItem;
+
 import java.util.Comparator;
 
 public class HumanNameComporator <E extends GenThreeItem> implements Comparator<E> {

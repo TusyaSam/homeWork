@@ -1,3 +1,5 @@
+import model.humans.tree.GenThree;
+
 import java.io.*;
 
 public class FileHandler implements FilesWorking{

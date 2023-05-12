@@ -1,3 +1,5 @@
+package model.humans;
+
 public interface GenThreeItem {
 
         String getName();
@@ -5,4 +7,5 @@ public interface GenThreeItem {
         String getDateOfBirth();
 
         String getSurname();
+        int getId();
 }

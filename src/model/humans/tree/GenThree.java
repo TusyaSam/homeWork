@@ -1,3 +1,9 @@
+package model.humans.tree;
+
+import model.humans.comporator.HumanBirthdayComporator;
+import model.humans.comporator.HumanNameComporator;
+import model.humans.GenThreeItem;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -33,7 +39,7 @@ public class GenThree <E extends GenThreeItem> implements Serializable, Iterable
     }
 
 
-//    public Human getByName (String name){/*Поиск по имени*/
+//    public model.humans.Human getByName (String name){/*Поиск по имени*/
 //        for (E human: humanList ){
 //            if (human.getName().equals(name)){
 //                return human;
@@ -60,12 +66,12 @@ public class GenThree <E extends GenThreeItem> implements Serializable, Iterable
 //    }
 
 
-    public void listOfNames() {
-        int count = 0;
+    public String listOfNames() {
+        StringBuilder stringBuilder = new StringBuilder();;
         for (E human : humanList) {
-            count++;
-            System.out.println(count + " " + human.getName());
+            stringBuilder.append(human.getId() + " " + human.getName()+"\n");
         }
+        return stringBuilder.toString();
     }
 
     @Override

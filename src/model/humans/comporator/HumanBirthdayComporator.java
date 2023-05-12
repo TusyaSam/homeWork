@@ -1,3 +1,7 @@
+package model.humans.comporator;
+
+import model.humans.GenThreeItem;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
