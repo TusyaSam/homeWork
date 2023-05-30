@@ -1,8 +1,10 @@
+package model;
+
 import model.humans.tree.GenThree;
 
 import java.io.*;
 
-public class FileHandler implements FilesWorking{
+public class FileHandler implements FilesWorking {
     @Override
     public boolean save(Serializable serializable, String filePath) {
         try {

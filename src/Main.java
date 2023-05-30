@@ -1,6 +1,5 @@
+import model.FileHandler;
 import model.Service;
-import model.humans.Gender;
-import model.humans.Human;
 import model.humans.tree.GenThree;
 import presenter.Presenter;
 import ui.Console;
@@ -12,7 +11,7 @@ import java.io.IOException;
 public class Main {
     public static void main (String[] args) throws IOException{
         String filePath = "src/file.txt";
-        FilesWorking filesWorking = new FileHandler();
+
         View view = new Console();
         GenThree genThree = new GenThree();
         Service service = new Service();
